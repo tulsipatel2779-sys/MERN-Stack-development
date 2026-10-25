@@ -1,0 +1,12 @@
+const express=require('express');
+const app=express();
+const PORT=5006;
+app.use(express.json());
+app.use((req,res,next)=>{res.setHeader('X-App','Campus-Library');next();});
+app.use((req,res,next)=>{console.log(`${req.method} ${req.path}`);next();});
+app.get('/',(req,res)=>res.json({message:'Campus Library API is running'}));
+app.get('/api/books',(req,res)=>res.json([{id:1,title:'Clean Code',available:true},{id:2,title:'Eloquent JavaScript',available:false},{id:3,title:'The Pragmatic Programmer',available:true}]));
+app.get('/api/books/:id',(req,res)=>{const id=Number(req.params.id);const book=[{id:1,title:'Clean Code',available:true},{id:2,title:'Eloquent JavaScript',available:false},{id:3,title:'The Pragmatic Programmer',available:true}].find(b=>b.id===id);if(!book)return res.status(404).json({error:'Book not found'});res.json(book);});
+app.post('/api/echo',(req,res)=>res.status(201).json({received:req.body}));
+app.use((req,res)=>res.status(404).json({error:'Route not found'}));
+app.listen(PORT,()=>console.log(`Library server: http://localhost:${PORT}`));

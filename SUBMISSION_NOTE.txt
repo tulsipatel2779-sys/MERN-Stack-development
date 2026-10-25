@@ -1,0 +1,1 @@
+Friend version: same practical concepts/questions, different implementation, UI, data and styling.

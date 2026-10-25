@@ -1,0 +1,4 @@
+import React,{useState}from'react';
+import './App.css';
+function Task({name,done,onToggle}){return <div className={done?'task done':'task'}><span>{name}</span><button onClick={onToggle}>{done?'Completed':'Mark done'}</button></div>}
+export default function App(){const[completed,setCompleted]=useState([]);const tasks=['Read React notes','Practice props','Build a mini card','Review event handling'];const toggle=t=>setCompleted(c=>c.includes(t)?c.filter(x=>x!==t):[...c,t]);return <div className="page"><div className="top"><div><small>STUDY DESK</small><h1>Today’s Focus</h1></div><div className="score">{completed.length}/{tasks.length}</div></div><p className="hint">Props send data to Task; state remembers completed items; events update the list.</p><div className="list">{tasks.map(t=><Task key={t} name={t} done={completed.includes(t)} onToggle={()=>toggle(t)}/>)}</div></div>}

@@ -1,0 +1,10 @@
+const express=require('express');
+const app=express();
+app.use(express.json());
+let students=[{id:101,name:'Mira Joshi',course:'BCA',semester:4},{id:102,name:'Kabir Shah',course:'BSc IT',semester:3},{id:103,name:'Nisha Patel',course:'MCA',semester:2}];
+app.get('/api/students',(req,res)=>res.json(students));
+app.get('/api/students/:id',(req,res)=>{const student=students.find(x=>x.id===Number(req.params.id));if(!student)return res.status(404).json({error:'Student not found'});res.json(student);});
+app.post('/api/students',(req,res)=>{const{name,course,semester}=req.body;if(!name||!course||semester===undefined)return res.status(400).json({error:'name, course and semester are required'});const student={id:Date.now(),name,course,semester:Number(semester)};students.push(student);res.status(201).json(student);});
+app.put('/api/students/:id',(req,res)=>{const i=students.findIndex(x=>x.id===Number(req.params.id));if(i<0)return res.status(404).json({error:'Student not found'});students[i]={...students[i],...req.body,id:students[i].id};res.json(students[i]);});
+app.delete('/api/students/:id',(req,res)=>{const i=students.findIndex(x=>x.id===Number(req.params.id));if(i<0)return res.status(404).json({error:'Student not found'});const removed=students.splice(i,1)[0];res.json({message:'Student deleted',student:removed});});
+app.listen(5007,()=>console.log('Student API running on http://localhost:5007'));
