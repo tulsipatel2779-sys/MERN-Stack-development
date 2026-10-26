@@ -1,0 +1,8 @@
+require('dotenv').config(); const express=require('express'), mongoose=require('mongoose'), cors=require('cors');
+const app=express(); app.use(cors()); app.use(express.json()); const PORT=Number(process.env.PORT||5310);
+const Habit=mongoose.model('Habit',new mongoose.Schema({name:{type:String,required:true,trim:true},category:{type:String,default:'Personal'},note:{type:String,default:''},completedToday:{type:Boolean,default:false},streak:{type:Number,default:0}},{timestamps:true}));
+app.get('/api/habits',async(_req,res)=>{try{res.json(await Habit.find().sort({createdAt:-1}));}catch(e){res.status(500).json({error:e.message});}});
+app.post('/api/habits',async(req,res)=>{try{const {name,category,note}=req.body;if(!name||!name.trim())return res.status(400).json({error:'Habit name is required'});res.status(201).json(await Habit.create({name,category,note}));}catch(e){res.status(400).json({error:e.message});}});
+app.patch('/api/habits/:id/today',async(req,res)=>{try{const h=await Habit.findById(req.params.id);if(!h)return res.status(404).json({error:'Habit not found'});h.completedToday=!h.completedToday;if(h.completedToday)h.streak+=1;else h.streak=Math.max(0,h.streak-1);await h.save();res.json(h);}catch(e){res.status(400).json({error:e.message});}});
+app.delete('/api/habits/:id',async(req,res)=>{try{const h=await Habit.findByIdAndDelete(req.params.id);if(!h)return res.status(404).json({error:'Habit not found'});res.json({deleted:true,id:req.params.id});}catch(e){res.status(400).json({error:e.message});}});
+mongoose.connect(process.env.MONGO_URI||'mongodb://127.0.0.1:27017/pranjal_habit_garden').then(()=>app.listen(PORT,()=>console.log(`Habit Garden API on ${PORT}`))).catch(e=>{console.error(e.message);process.exitCode=1;});

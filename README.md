@@ -1,12 +1,12 @@
-# Friend React / MERN Practicals – Unique Version
+# Pranjal — Unique MERN Practicals 08–13
 
-Same practical concepts/questions as the assignment, but independently implemented.
-Examples, data, UI layouts, component names, variable names, text and styling are different.
+These are six distinct educational projects with separate concepts and implementations.
 
-01 Functional Components, JSX, Component Reusability
-02 Props, State Management, Event Handling
-03 React Forms, Controlled Components, Validation
-04 SPA using React Router
-05 React app consuming REST APIs using Axios and Fetch API
-06 Express.js routing, middleware and request handling
-07 RESTful APIs for Student Records Management using Express.js and Postman
+## Setup
+- Install Node.js 20+ and MongoDB Community Server for database-backed practicals.
+- In each practical, open `server`, run `npm install`, then `npm start`.
+- For projects with a client, open a second terminal in `client`, run `npm install`, then `npm run dev`.
+- Copy `.env.example` to `.env` if you need to change configuration.
+- Read each practical README for endpoints, ports and testing steps.
+
+These projects have not been runtime-tested in this generation environment. Run them locally and capture your own genuine output screenshots for submission. Never treat code inspection as proof of successful execution.
