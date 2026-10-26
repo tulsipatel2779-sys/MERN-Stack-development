@@ -10,4 +10,4 @@ These are thirteen distinct educational projects with separate concepts and impl
 - Copy `.env.example` to `.env` if you need to change configuration.
 - Read each practical README for endpoints, ports and testing steps.
 
-These projects have not been runtime-tested in this generation environment. Run them locally and capture your own genuine output screenshots for submission. Never treat code inspection as proof of successful execution.
+Thes projects have not been runtime-tested in this generation environment. Run them locally and capture your own genuine output screenshots for submission. Never treat code inspection as proof of successful execution.
