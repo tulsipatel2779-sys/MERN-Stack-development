@@ -1,8 +1,9 @@
-# Pranjal — Unique MERN Practicals 08–13
+# Tulsi — Unique MERN Practicals 01–13
 
-These are six distinct educational projects with separate concepts and implementations.
+These are thirteen distinct educational projects with separate concepts and implementations.
 
 ## Setup
+
 - Install Node.js 20+ and MongoDB Community Server for database-backed practicals.
 - In each practical, open `server`, run `npm install`, then `npm start`.
 - For projects with a client, open a second terminal in `client`, run `npm install`, then `npm run dev`.
